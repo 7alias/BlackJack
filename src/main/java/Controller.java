@@ -39,15 +39,15 @@ public class Controller {
             dealerCards.add(deck.getCard());
             Model dealerSecondCard = deck.getCard();
 
-            View.printCards(dealerCards);
+            View.printCards((Model) dealerCards);
 
 
-            if (getPoints(dealerCards) == 11) {
+            if (getPoints((Model) dealerCards) == 11) {
 
                 if (dealerSecondCard.getCardValue() == 10) {
 
                     dealerCards.add(dealerSecondCard);
-                    View.printGameStatus(dealerCards);
+                    View.printGameStatus((Model) dealerCards);
 
                     if (startNewGame(false)) continue;
                     else break;
@@ -58,9 +58,9 @@ public class Controller {
             Boolean startNewGame = null;
             while (true) {
                 playerCards.add(deck.getCard());
-                View.printGameStatus(playerCards);
-                if (getPoints(playerCards) > 21) {
-                    if (!(getPoints(playerCards) == 22
+                View.printGameStatus((Model) playerCards);
+                if (getPoints((Model) playerCards) > 21) {
+                    if (!(getPoints((Model) playerCards) == 22
                             && playerCards.size() == 2
                             && playerCards.get(0).getValue().equals("Ace")
                             && playerCards.get(1).getValue().equals("Ace"))) {
@@ -86,16 +86,16 @@ public class Controller {
                 else break;
             }
 
-            while (getPoints(dealerCards) < 17) {
-                View.printGameStatus(dealerCards);
+            while (getPoints((Model) dealerCards) < 17) {
+                View.printGameStatus((Model) dealerCards);
                 dealerCards.add(deck.getCard());
 
-                if (getPoints(dealerCards) > 21) {
-                    if (!(getPoints(dealerCards) == 22
+                if (getPoints((Model) dealerCards) > 21) {
+                    if (!(getPoints((Model) dealerCards) == 22
                             && dealerCards.size() == 2
                             && dealerCards.get(0).getValue().equals("Ace")
                             && dealerCards.get(1).getValue().equals("Ace"))) {
-                        View.printGameStatus(dealerCards);
+                        View.printGameStatus((Model) dealerCards);
                         startNewGame = startNewGame(true);
                         break;
                     }
@@ -107,12 +107,12 @@ public class Controller {
                 else break;
             }
 
-            View.printGameStatus(playerCards);
+            View.printGameStatus((Model) playerCards);
 
             boolean playerAnswer;
-            if (getPoints(dealerCards) > getPoints(playerCards)) {
+            if (getPoints((Model) dealerCards) > getPoints((Model) playerCards)) {
                 playerAnswer = startNewGame(false);
-            } else if (getPoints(dealerCards) < getPoints(playerCards)) {
+            } else if (getPoints((Model) dealerCards) < getPoints((Model) playerCards)) {
                 playerAnswer = startNewGame(true);
             } else {
                 playerAnswer = startNewGame();

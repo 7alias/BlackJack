@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class View extends Deck {
 
     public static void printCards(Model cards) {
