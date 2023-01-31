@@ -1,32 +1,61 @@
-import java.util.Arrays;
-import java.util.HashSet;
-
-import java.util.Set;
+import java.util.*;
 
 public class Deck {
-    private Set<Integer> cardSet = new HashSet();
+    private static List<Model> deck;
 
-    public Deck() {
-        Set<Integer> cardRank = new HashSet<>();
+    Deck(){
+        this.deck = new ArrayList<>();
+    }
 
 
-        for (int i = 0; i < 12; i++) {
-            cardRank.add((int) (Math.random() * 10 + 2));
+
+
+    public static Deck newGame() {
+
+        Deck cardSet = new Deck();
+
+        String[] cardSuit = {"♠", "♥", "♦", "♣"};
+        String[] cardRank = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+        for (int i = 0; i < cardRank.length; i++) {
+
+            for (String rank : cardRank) {
+                for (String suit : cardSuit) {
+                    deck.add(new Model(rank, suit));
+                }
+            }
+            Collections.shuffle(deck);
         }
-
-        setCardSet(cardRank);
-    }
-
-
-
-
-    public void setCardSet(Set<Integer> cardSet) {
-
-        this.cardSet = Set.copyOf(cardSet);
-
-    }
-
-    public Set<Integer> getCardSet() {
         return cardSet;
+
+    }
+
+    public Model getCard() {
+        Model card = deck.get(0);
+        deck.remove(0);
+        return card;
+    }
+
+    public Model draw() {
+        return deck.remove(0);
+    }
+
+    public int getDeckSize() {
+        return deck.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Model card : deck) {
+            sb.append(card.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }
+
+
+
+
+
+
+
